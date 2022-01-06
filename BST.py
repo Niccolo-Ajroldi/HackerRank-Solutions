@@ -7,13 +7,6 @@ class Node:
 
     def __str__(self):
         return str(self.info) 
-
-def preOrder(root):
-    if root == None:
-        return
-    print (root.info, end=" ")
-    preOrder(root.left)
-    preOrder(root.right)
     
 class BinarySearchTree:
     def __init__(self): 
@@ -44,9 +37,53 @@ def insert_node(root, val):
 
 # initialize a BST
 tree = BinarySearchTree()
-arr = [4, 2, 1, 3, 7, 6]
+arr = [4,3,2,1,5]
+#     4
+#    / \
+#   3   5
+#  / \
+# 1   2
 
 for t in arr:
     tree.insert(t)
 
-preOrder(tree.root)
+def preOrder(root):
+    if root == None:
+        return
+    print (root.info, end=" ")
+    preOrder(root.left)
+    preOrder(root.right)
+    
+preOrder(tree.root) # 4 3 2 1 5
+
+def inOrder(root):
+    if root == None:
+        return
+    inOrder(root.left)
+    print(root.info, end=" ")
+    inOrder(root.right)
+    
+inOrder(tree.root) # 1 2 3 4 5
+
+def Postorder(root):
+    if root == None:
+        return
+    Postorder(root.left)
+    Postorder(root.right)
+    print(root.info, end=" ")
+    
+Postorder(tree.root) # 1 2 3 5 4
+
+# (a) Inorder (Left, Root, Right) 
+# (b) Preorder (Root, Left, Right)   
+# (c) Postorder (Left, Right, Root) 
+
+# %% Breadth-First or Level Order Traversal: 4 3 5 2 1
+
+
+
+
+
+
+
+
