@@ -67,12 +67,19 @@ def visit_and_order(root, my_set):
     preOrder(root.left)
     preOrder(root.right)
 
-ordered_set = {}
+ordered_set = OrderedSet()
 type(ordered_set)
 
-visit_and_order(tree.root, ordered_set)
-
+ordered_set.add(1)
+ordered_set.add(10)
+ordered_set.add(3)
 ordered_set
+
+visit_and_order(tree.root, ordered_set)
+ordered_set
+
+print(ordered_set)
+[print(a) for a in ordered_set]
 
 
 type({})
