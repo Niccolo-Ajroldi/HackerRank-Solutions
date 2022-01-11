@@ -16,7 +16,6 @@ https://wiki.python.org/moin/TimeComplexity
 
 # lookup, insert, delete: O(1)
 # but if hash table load factor is high -> collisions, O(n)
-#
 
 .add()
 .update(an_iterable_obj) # O(|an_iterable_obj|)
@@ -55,8 +54,18 @@ del my_list[2] # delete item at index 2
 #------------------------------------------------------------------------------
 # dictionary (Hash Table)
 
+maintain insertion order
+
+.get(idx)
+.pop(idx)
 .clear()
-del dict[1]
+.copy()
+.items() # returns pairs key-value
+
+del dict[idx]
+
+# sort by key
+dict(sorted(dic.items()))
 
 d = {"a": 1, "b": 2}  # becomes {'a': 1, 'b': 3}
 
@@ -70,7 +79,6 @@ should have:
 .push_back()
 .front()
 .rear()
-
 
 from collections import deque
 dq = deque(['name','age','DOB']) 
