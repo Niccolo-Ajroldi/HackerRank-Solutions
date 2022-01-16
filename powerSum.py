@@ -23,6 +23,11 @@ Resursive-dynamic-programming-style solution:
     https://www.hackerrank.com/challenges/the-power-sum/forum/comments/278697
 """
 
+# TODO: implement in a more efficient way, removing the highest element
+# each time, instead of the smallest
+# compelxity is in such case reduced because we do not have to reasssing available
+# just use .pop()
+
 
 def powerSum(X, N):
     
