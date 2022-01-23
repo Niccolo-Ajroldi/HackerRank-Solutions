@@ -34,7 +34,7 @@ def getWays(n, c):
     # Write your code here
     
     # O(m)
-    # c = sorted(c)
+    c = sorted(c)
     
     return f_recursive(n, c)
 
@@ -55,7 +55,7 @@ def f_recursive(n, c):
     return res
 
 
-n = 5
+n = 4
 m = 3
 c = [1,2,3]
 
