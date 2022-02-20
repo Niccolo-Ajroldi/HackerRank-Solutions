@@ -128,7 +128,7 @@ class MinHeap(Heap):
         return popped
     
     # heapify node in position i
-    # hepify(i) controlla che i sia più piccolo dei suoi figli,
+    # hepify(i) controlla che i sia più piccolo dei suoi figli.
     # Se questo è il caso, la procedura fa scivolare l’elemento arr[i] lungo
     # un cammino dell’albero in modo da ristabilire la proprietà della heap.
     def heapify(self, i):
@@ -136,35 +136,17 @@ class MinHeap(Heap):
         # if the node i snot a leaf
         if not self.is_leaf(i):
             
-            # if the node is greater than the left child:
-            if self.arr[i] > self.arr[self.left_child(i)]:
-                # swap with the left child and heapify the left child
-                self.swap(i, self.left_child(i))
-                self.heapify(self.left_child(i))
-                
-                
-            # if the node is greater than the right child:
-            elif self.arr[i] > self.arr[self.right_child(i)]:
-                # swap with the right child and heapify the right child
-                self.swap(i, self.right_child(i))
-                self.heapify(self.right_child(i))
-        
-        
-            # if (self.arr[i] > self.arr[self.left_child(i)] or
-            #    self.arr[i] > self.arr[self.right_child(i)]):
- 
-            #     # Swap with the left child and heapify
-            #     # the left child
-            #     if self.arr[self.left_child(i)] < self.arr[self.right_child(i)]:
-            #         self.swap(i, self.left_child(i))
-            #         self.heapify(self.left_child(i))
- 
-            #     # Swap with the right child and heapify
-            #     # the right child
-            #     else:
-            #         self.swap(i, self.right_child(i))
-            #         self.heapify(self.right_child(i))
-    
+            # if the node is greater than one of its children
+            if self.arr[i] > self.arr[self.left_child(i)] or \
+                self.arr[i] > self.arr[self.right_child(i)]:
+                    
+                    # swap node[i] with the smallest of its children and heapify
+                    if self.arr[self.left_child(i)] < self.arr[self.right_child(i)]:
+                        self.swap(i, self.left_child(i))
+                        self.heapify(self.left_child(i))
+                    else:
+                        self.swap(i, self.right_child(i))
+                        self.heapify(self.right_child(i))
     
     # check the heap property
     def check_heap_property(self):
