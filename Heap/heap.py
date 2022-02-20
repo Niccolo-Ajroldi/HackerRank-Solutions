@@ -12,7 +12,6 @@ Created on Sat Feb 19 19:56:26 2022
 import math 
 import sys
 
-
 #%%
 #------------------------------------------------------------------------------
 # BASE CLASS
@@ -23,8 +22,8 @@ class Heap:
     def __init__(self, maxsize):
         self.maxsize = maxsize
         self.size = 0
-        self.depth = 0
-        self.arr = [sys.maxsize] * maxsize
+        self.MAX = sys.maxsize
+        self.arr = [self.MAX] * maxsize
 
     # return boolean
     def empty(self):
@@ -49,9 +48,17 @@ class Heap:
     def right_child(self, i):
         return 2*i + 2
     
+    # return the depth of the tree
+    def depth(self):
+        if self.empty():
+            return 0
+        else:
+            return math.floor(math.log(self.size, 2))
+    
     # returns True if the i-th node is a leaf node
     def is_leaf(self, i):
-        return i > 2*self.depth
+        depth = self.depth()
+        return i >= 2**depth - 1
     
     # return root
     def root(self):
@@ -62,8 +69,9 @@ class Heap:
         print(self.arr)
         
     def print(self):
+        depth = self.depth()
         # for each level of depth, print the nodes in that level
-        for d in range(self.depth+1):
+        for d in range(depth+1):
             print([self.arr[i] for i in range(2**d-1, 2**(d+1)-1)], sep=" ")
     
 #------------------------------------------------------------------------------
@@ -85,28 +93,45 @@ class MinHeap(Heap):
         if self.full():
             print("Error: full heap")
             return
-        
+                
+        # insert at the end
+        self.arr[self.size] = el
+                
         # increase size
         self.size += 1
         
-        # if necessary, increase depth
-        self.depth = math.floor(math.sqrt(self.size))
-        
-        # insert at the end
-        self.arr[self.size] = el
-        
         # swap parent and child
-        current = self.size
+        current = self.size - 1
         while self.arr[current] < self.arr[self.parent(current)]:
             self.swap(current, self.parent(current))
             current = self.parent(current)
         
+    # get minimum element of the heap
+    def getmin(self):
+        
+        if self.empty():
+            print("Empty heap")
+        
+        # pop min
+        popped = self.arr[0]
+        
+        # reduce size
+        self.size -= 1
+        
+        # put another elemnet as root
+        self.arr[0] = self.arr[self.size]
+        self.arr[self.size] = self.MAX
+        
+        # call heapify to restore heap property
+        self.heapify(0)
+
+        return popped
     
     # heapify node in position i
     # hepify(i) controlla che i sia più piccolo dei suoi figli,
     # Se questo è il caso, la procedura fa scivolare l’elemento arr[i] lungo
     # un cammino dell’albero in modo da ristabilire la proprietà della heap.
-    def min_heapify(self, i):
+    def heapify(self, i):
         
         # if the node i snot a leaf
         if not self.is_leaf(i):
@@ -115,14 +140,31 @@ class MinHeap(Heap):
             if self.arr[i] > self.arr[self.left_child(i)]:
                 # swap with the left child and heapify the left child
                 self.swap(i, self.left_child(i))
-                self.min_heapify(self.left_child(i))
+                self.heapify(self.left_child(i))
                 
                 
             # if the node is greater than the right child:
             elif self.arr[i] > self.arr[self.right_child(i)]:
                 # swap with the right child and heapify the right child
                 self.swap(i, self.right_child(i))
-                self.min_heapify(self.right_child(i))
+                self.heapify(self.right_child(i))
+        
+        
+            # if (self.arr[i] > self.arr[self.left_child(i)] or
+            #    self.arr[i] > self.arr[self.right_child(i)]):
+ 
+            #     # Swap with the left child and heapify
+            #     # the left child
+            #     if self.arr[self.left_child(i)] < self.arr[self.right_child(i)]:
+            #         self.swap(i, self.left_child(i))
+            #         self.heapify(self.left_child(i))
+ 
+            #     # Swap with the right child and heapify
+            #     # the right child
+            #     else:
+            #         self.swap(i, self.right_child(i))
+            #         self.heapify(self.right_child(i))
+    
     
     # check the heap property
     def check_heap_property(self):
@@ -173,28 +215,30 @@ class MinHeap(Heap):
 h = MinHeap(10)
 
 h.empty()
-h.print_arr()
+
+h.insert(4)    
 h.print()
 
-h.insert(el=2)    
-h.size
-h.arr
+h.insert(3)    
+h.print()
 
-h.insert(3)
-h.size
-h.arr
+h.insert(1)    
+h.print()
 
-h.insert(1)
-h.size
-h.arr
+h.insert(8)    
+h.print()
 
-h.insert(8)
-h.size
-h.arr
+h.insert(0)    
+h.print()
 
-h.insert(0)
-h.size
-h.arr
+h.insert(9)
+h.print()
 
 h.print()
+h.depth()
+h.size
+
+h.getmin()
+h.print()
+
 
