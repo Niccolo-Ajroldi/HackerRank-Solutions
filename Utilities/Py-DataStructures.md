@@ -100,8 +100,9 @@ dq[idx]: access other  element O(n)
 
 use collections.deque with:
 
-.append()
-.pop()
+dq.append()
+dq.pop()
+dq[-1]
 
 #------------------------------------------------------------------------------
 # QUEUES: FIFO

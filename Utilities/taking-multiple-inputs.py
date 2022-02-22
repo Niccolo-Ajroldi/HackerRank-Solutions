@@ -16,7 +16,6 @@ input().split()
 # returns a list of int
 list(map(int, input().split()))
 
-
 a = [print(a) for a in [1,2,4]]
 
 a = [1,2,3]
