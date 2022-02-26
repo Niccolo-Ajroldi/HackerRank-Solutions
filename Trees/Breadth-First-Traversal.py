@@ -32,12 +32,13 @@ class BST:
 
 # initialize a BST
 tree = BST()
-arr = [4,3,2,1,5]
-#     4
+arr = [7,3,9,2,4]
+#     7
 #    / \
-#   3   5
+#   3   9
 #  / \
-# 1   2
+# 2   4
+
 
 for t in arr:
     tree.insert(t)
@@ -50,10 +51,88 @@ def preOrder(root):
     preOrder(root.left)
     preOrder(root.right)
     
-preOrder(tree.root) # 4 3 2 1 5
+preOrder(tree.root) # 7 3 2 4 9 
 
 #%% Breadth-First Traversal
 
+from collections import deque
+
+def print_BFT_iterative(root):
+    
+    queue = deque()
+    queue.append(root)
+    while queue:
+        curr = queue.popleft()
+        if curr:
+            print(curr.val)
+            queue.append(curr.left)
+            queue.append(curr.right)
+            
+print_BFT_iterative(tree.root)
+
+#     7
+#    / \
+#   3   9
+#  / \
+# 2   4
+
+def print_BFT_recursive(queue):
+    
+    if not queue:
+        return
+    curr = queue.popleft()
+    if curr:
+        print(curr.val)
+        queue.append(curr.left)
+        queue.append(curr.right)
+        print_BFT_recursive(queue)
+    
+queue = deque()        
+queue.append(tree.root)
+print_BFT_recursive(queue)
+
+#%% Breadth-First Search
+
+from collections import deque
+
+def search_BFT_iterative(root, el):
+    queue = deque()
+    queue.append(root)
+    while queue:
+        curr = queue.popleft()
+        if curr:
+            if curr.val==el:
+                return True
+            queue.append(curr.left)
+            queue.append(curr.right)
+    return False
+
+search_BFT_iterative(tree.root, 7)
+search_BFT_iterative(tree.root, 8)
+search_BFT_iterative(tree.root, 3)
+search_BFT_iterative(tree.root, 4)
+
+def search_BFT_recursive(queue, el):
+    if not queue:
+        return
+    curr = queue.popleft()
+    if curr:
+        if curr.val==el:
+            return True
+        queue.append(curr.left)
+        queue.append(curr.right)
+        return search_BFT_recursive(queue, el)
+    else:
+        return False
+
+queue = deque(); queue.append(tree.root)
+search_BFT_recursive(queue, 7)
+
+queue.clear(); queue.append(tree.root)
+search_BFT_recursive(queue, 8)
+
+queue.clear(); queue.append(tree.root)
+search_BFT_recursive(queue, 4)
 
 #%% Print in ordine crescente
 # O(N) + O()

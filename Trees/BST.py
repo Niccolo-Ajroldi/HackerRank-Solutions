@@ -3,7 +3,6 @@ class Node:
         self.info = info  
         self.left = None  
         self.right = None 
-        self.level = None 
 
     def __str__(self):
         return str(self.info) 
@@ -37,12 +36,12 @@ def insert_node(root, val):
 
 # initialize a BST
 tree = BinarySearchTree()
-arr = [4,3,2,1,5]
-#     4
+arr = [7,3,9,2,4]
+#     7
 #    / \
-#   3   5
+#   3   9
 #  / \
-# 1   2
+# 2   4
 
 for t in arr:
     tree.insert(t)
@@ -54,7 +53,7 @@ def preOrder(root):
     preOrder(root.left)
     preOrder(root.right)
     
-preOrder(tree.root) # 4 3 2 1 5
+preOrder(tree.root) # 7 3 2 4 9
 
 def inOrder(root):
     if root == None:
@@ -63,7 +62,7 @@ def inOrder(root):
     print(root.info, end=" ")
     inOrder(root.right)
     
-inOrder(tree.root) # 1 2 3 4 5
+inOrder(tree.root) # 2 3 4 7 9 
 
 def Postorder(root):
     if root == None:
@@ -72,7 +71,7 @@ def Postorder(root):
     Postorder(root.right)
     print(root.info, end=" ")
     
-Postorder(tree.root) # 1 2 3 5 4
+Postorder(tree.root) # 2 4 3 9 7
 
 # (a) Inorder (Left, Root, Right) 
 # (b) Preorder (Root, Left, Right)   
