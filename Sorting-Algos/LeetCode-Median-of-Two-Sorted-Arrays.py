@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Feb 27 22:48:30 2022
 
-@author: nicco
-"""
+# This solution is UGLY, but avoids to store the resulting sorted arrays
+# Memory: O(1)
+# Time: O(n/2)
 
-# SBAGLIATO!!
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         
@@ -15,34 +12,47 @@ class Solution:
         
         i = 0
         j = 0
+        
         # tengo traccia degli ultimi due numeri
-        x1 = min(nums1[0], nums2[0])
-        x2 = max(nums1[0], nums2[0])
-        count = 0
-        while i+j != (n//2):
-            
-            if i<=n1-1 and j<=n2-1:
-                if nums1[i] < nums2[j]:
+        if n1>0 and n2>0:
+            x1 = min(nums1[0],nums2[0])
+        elif n1>0 and n2==0:
+            x1 = nums1[0]
+        elif n1==0 and n2>0:
+            x1 = nums2[0]
+        x2 = x1
+        
+        while i<n1 and j<n2:
+            if nums1[i] < nums2[j]:
+                if i+j>0:
                     x1 = x2
                     x2 = nums1[i]
-                    i += 1
-                else:
+                i+=1
+            else:
+                if i+j>0:
                     x1 = x2
                     x2 = nums2[j]
-                    j += 1
-            elif i>n1-1:
-                    j += 1
-                    x1 = x2
-                    x2 = nums2[j]
-            elif j>n2-1:
-                    i += 1
-                    x1 = x2
-                    x2 = nums1[i]
+                j+=1
                 
+            if (i+j)==n//2+1:
+                break
+        
+        if (i+j)!=n//2+1:
+            if i<n1:
+                while (i+j)!=n//2+1:
+                    x1 = x2
+                    x2 = nums1[i]
+                    i+=1
+            elif j<n2:
+                while (i+j)!=n//2+1:
+                    x1 = x2
+                    x2 = nums2[j]
+                    j+=1
+        
         # if n is even
         if (n%2==0):
             return float((x1+x2)/2)
         else:
-            return x1
+            return x2
 
         
