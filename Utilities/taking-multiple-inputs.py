@@ -28,3 +28,7 @@ list(map(str, a))
 " ".join([str(el) for el in a])
 
 " ".join(list(map(str,a)))
+
+# with LeetCode input: "[1,2,3]"
+list(map(int,input()[1:-1].split(",")))
+

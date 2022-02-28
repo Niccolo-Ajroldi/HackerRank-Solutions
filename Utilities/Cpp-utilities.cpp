@@ -1,26 +1,26 @@
 
+// UTILITIES
 #ifndef _MY_CLASS_
 #define _MY_CLASS_
 #endif
-
-#include <string>
-#include <vector>
-#include <iostream>
-
+std::size_t
 
 // I/O
-std::cout << data << std::endl;
+#include <iostream>
+std::cin  >> vec[i];
+std::cout << vec[i];
 
 // MATH
 #include <math.h>
 floor()
 ceil()
 
-
 // STRINGS
+#include <string>
 strcmp(s1,s2);
 
 // VECTORS
+#include <vector>
 std::vector<int> vec; // default constructor (empty container)
 std::vector<int> vec(4, my_val); // fill constructor
 std::vector<int> vec(vec2.begin(),vec2.end()); // range constructor

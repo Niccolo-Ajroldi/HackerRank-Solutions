@@ -4,12 +4,6 @@ Created on Sat Feb  5 17:34:37 2022
 
 @author: nicco
 """
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Feb  5 16:39:19 2022
-
-@author: nicco
-"""
 
 # n = int(input())
 # arr = list(map(int, input().split()))
@@ -24,7 +18,6 @@ def partition(arr, start, end):
     
     # iterate over arr to be splitted
     i = start
-    j = start
     
     for j in range(start, end):
         if arr[j] < pivot:
