@@ -31,6 +31,6 @@ def binary_search(v, val):
         
     return 0
 
-v
+
 binary_search(v,13)
 
